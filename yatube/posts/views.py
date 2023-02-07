@@ -1,9 +1,11 @@
-
 from django.shortcuts import HttpResponse
+# Импортируем загрузчик.
+from django.shortcuts import render
 
 # Create your views here.
-def index(request):
-    return HttpResponse('Главная страница')
+def index(request, template):
+    template = 'posts/index.html'
+    return render(request, template)
 
 
 def group_posts(requests, slug):
