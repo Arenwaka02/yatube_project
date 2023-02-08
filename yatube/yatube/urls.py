@@ -14,12 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-# импорт include позволит использовать адреса, включенные в приложения
 from django.urls import include, path
 
 
 urlpatterns = [
-    # Сначала проверяем все пути, которые есть в приложении posts
-    path('', include('posts.urls')),
     path('admin/', admin.site.urls),
+    path('', include('posts.urls', namespace='posts')),
 ]
