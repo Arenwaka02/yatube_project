@@ -8,9 +8,6 @@ def index(request):
     return render(request, template)
 
 
-def group_posts(requests, slug):
-    return HttpResponse(f'Пост номер {slug}')
-
-def group_posts_list(requests):
+def group_posts(request, slug):
     template = 'posts/group_list.html'
     return render(request, template)
