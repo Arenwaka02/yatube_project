@@ -1,21 +1,25 @@
-from django.shortcuts import HttpResponse
-# Импортируем загрузчик.
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 
-# Create your views here.
+from . models import Post, Group
+
+
 def index(request):
     template = 'posts/index.html'
-    title = 'Это главная страница проекта Yatube'
+    posts = Post.objects.order_by('-pub_date')[:10]
+
     context = {
-        'title': title,
+        'posts': posts,
+        'template': template,
     }
     return render(request, template, context)
 
 
 def group_posts(request, slug):
     template = 'posts/group_list.html'
-    group = 'Здесь будет информация о группах проекта Yatube'
+    group = get_object_or_404(Group, slug=slug)
+    posts = Post.objects.filter(group=group).order_by('-pub.date')[:10]
     context = {
         'group': group,
+        'posts': posts,
     }
-    return render(request, template, context)
+    return render(request, template, {'slug': slug}, context)
